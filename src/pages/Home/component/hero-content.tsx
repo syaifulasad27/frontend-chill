@@ -1,9 +1,8 @@
-import bgImg from "@/assets/img/bg-hero.png"
 import { Button } from "@/components/ui/button"
 
 const HeroContent = () => {
     return (
-        <section className="relative bg-cover bg-center h-[50vh] sm:h-[70vh] lg:h-[80vh] xl:h-[600px]" style={{ backgroundImage: `url(${bgImg})` }}>
+        <section className="relative bg-cover bg-center h-[50vh] sm:h-[70vh] lg:h-[80vh] xl:h-[600px]" style={{ backgroundImage: `url(${'/assets/img/bg-hero.png'})` }}>
         <div className="absolute inset-0 bg-black/40" aria-hidden="true" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#00000000] via-[#101213DB] to-[#181A1C]" style={{
             background: 'linear-gradient(0deg, #181A1C 0%, #101213DB 40%, #00000000 80%)',}} />
