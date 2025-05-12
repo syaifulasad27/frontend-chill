@@ -17,7 +17,7 @@ const ProfileEdit = () => {
         <form className="w-full sm:w-[500px] lg:w-[642px] space-y-4">
           <div className="flex items-center gap-4">
             <img
-              src="/assets/img/avatar.png"
+              src="/assets/img/avatar.webp"
               alt="Avatar"
               className="w-28 h-28 rounded-full object-cover"
             />
