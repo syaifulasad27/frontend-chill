@@ -9,10 +9,10 @@ import {
 import { CardFilmContinue } from "@/components/card-film-continue"
 
 const movies = [
-  { title: "Don't Look Up", rating: "4.5", img: "/src/assets/img/img1.png" },
-  { title: "The Batman", rating: "4.2", img: "/src/assets/img/img2.png" },
-  { title: "Blue Lock", rating: "4.6", img: "/src/assets/img/img3.png" },
-  { title: "A Man Called Otto", rating: "4.4", img: "/src/assets/img/img4.png" },
+  { title: "Don't Look Up", rating: "4.5", img: "/assets/img/img1.png" },
+  { title: "The Batman", rating: "4.2", img: "/assets/img/img2.png" },
+  { title: "Blue Lock", rating: "4.6", img: "/assets/img/img3.png" },
+  { title: "A Man Called Otto", rating: "4.4", img: "/assets/img/img4.png" },
 ]
 
 export function FilmContinue() {
