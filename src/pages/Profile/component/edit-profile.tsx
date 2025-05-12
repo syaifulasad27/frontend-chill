@@ -70,7 +70,7 @@ const ProfileEdit = () => {
               <div className=" flex items-center space-x-4 text-white">
                 <img
                   src="/assets/img/warning.webp"
-                  alt="warning"
+                  alt="Warning"
                   className="h-10 w-10 sm:h-20 sm:w-20 object-cover"
                 />
                 <div className="flex-1 space-y-2">
