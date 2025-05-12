@@ -3,39 +3,73 @@ import { Link, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 
 const NavBar = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [user, setUser] = useState<{ name: string } | null>(null)
-    const [isProfileOpen, setProfileOpen] = useState(false)
-    const [isMobileOpen, setMobileOpen] = useState(false)
-  
-    const profileRef = useRef<HTMLDivElement>(null)
-    const navigate = useNavigate()
-  
-    useEffect(() => {
-      const storedUser = localStorage.getItem("user")
-      if (storedUser) {
-        setUser(JSON.parse(storedUser))
-        setIsLoggedIn(true)
-      }
-    }, [])
-  
-    const handleLogout = () => {
-      localStorage.removeItem("user")
-      setIsLoggedIn(false)
-      setUser(null)
-      navigate("/login")
-    }
-  
-    useEffect(() => {
-      const handleClickOutside = (e: MouseEvent) => {
-        if (profileRef.current && !profileRef.current.contains(e.target as Node)) {
-          setProfileOpen(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<{ name: string; username: string } | null>(null);
+  const [isProfileOpen, setProfileOpen] = useState(false);
+  const [isMobileOpen, setMobileOpen] = useState(false);
+
+  const profileRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkLoggedInUser = () => {
+      const storedUsers = localStorage.getItem("user");
+      if (storedUsers) {
+        try {
+          // Parse data dan pastikan selalu berupa array
+          let users = JSON.parse(storedUsers);
+          if (!Array.isArray(users)) {
+            users = [users];
+          }
+
+          // Cari user dengan isLogin: true (ambil yang pertama jika ada banyak)
+          const loggedInUser = users.find((user: { isLogin: boolean; name?: string; username: string }) => user.isLogin === true);
+
+          if (loggedInUser) {
+            setUser({
+              name: loggedInUser.name || loggedInUser.username,
+              username: loggedInUser.username
+            });
+            setIsLoggedIn(true);
+          } else {
+            // Jika tidak ada yang login
+            setIsLoggedIn(false);
+            setUser(null);
+          }
+        } catch (error) {
+          console.error("Error parsing user data:", error);
         }
       }
-      document.addEventListener("click", handleClickOutside)
-      return () => document.removeEventListener("click", handleClickOutside)
-    }, [])
+    };
 
+    checkLoggedInUser();
+  }, []);
+  
+
+  const handleLogout = () => {
+    const storedUsers = localStorage.getItem("user");
+    
+    if (storedUsers) {
+      try {
+        let users = JSON.parse(storedUsers);
+        if (!Array.isArray(users)) users = [users];
+
+        // Update semua user menjadi isLogin: false
+        const updatedUsers = users.map((user: { isLogin: boolean }) => ({
+          ...user,
+          isLogin: false
+        }));
+
+        localStorage.setItem("user", JSON.stringify(updatedUsers));
+      } catch (error) {
+        console.error("Logout error:", error);
+      }
+    }
+
+    setIsLoggedIn(false);
+    setUser(null);
+    navigate("/login");
+  };
   return (
     <>
       <nav className="px-4 lg:px-14 py-3 flex justify-between items-center bg-[#181A1C]">

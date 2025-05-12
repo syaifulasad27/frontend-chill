@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,12 +9,78 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [password1, setPassword1] = useState("")
+  const navigate = useNavigate()
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Ambil data user dari localStorage
+    const storedUsers = localStorage.getItem("user");
+    let users: Array<{
+      username: string;
+      name: string;
+      email: string;
+      password: string;
+      isLogin: boolean;
+    }> = [];
+
+    // Parse data yang ada (jika ada)
+    if (storedUsers) {
+      try {
+        users = JSON.parse(storedUsers);
+
+        // Jika data bukan array (misal: object langsung), konversi ke array
+        if (!Array.isArray(users)) {
+          users = [users]; // Ubah object menjadi array
+        }
+      } catch (error) {
+        console.error("Error parsing stored users:", error);
+        users = []; // Reset jika parsing gagal
+      }
+    }
+
+    // Cek apakah username sudah ada
+    const isUsernameExist = users.some(
+      (user) => user.username === username
+    );
+
+    if (isUsernameExist) {
+      alert('Error: Username sudah digunakan!');
+      return;
+    }
+
+    // Validasi password
+    if (password !== password1) {
+      alert('Error: Password tidak sama!');
+      return;
+    }
+
+    // Tambahkan user baru
+    const newUser = {
+      username,
+      name: username,
+      email: '',
+      password,
+      isLogin: true,
+    };
+
+    users.push(newUser); // Tambahkan ke array
+
+    // Simpan kembali ke localStorage
+    localStorage.setItem("user", JSON.stringify(users));
+
+    // Redirect ke homepage
+    navigate("/");
+  };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
         <CardHeader className="text-center">
@@ -23,7 +90,7 @@ export function RegisterForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-2">
               <div className="grid gap-6">
                 <div className="grid gap-3">
@@ -34,19 +101,27 @@ export function RegisterForm({
                     placeholder="Masukan username"
                     className="w-full px-3 py-2 border-gray-600 bg-black/50 text-white rounded-full"
                     required
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password" className="text-white">Kata Sandi</Label>
                   </div>
-                  <Input id="password" type="password" placeholder="Masukan kata sandi" className="w-full px-3 py-2 border-gray-600 bg-black/50 text-white rounded-full" required />
+                  <Input id="password" type="password" placeholder="Masukan kata sandi" className="w-full px-3 py-2 border-gray-600 bg-black/50 text-white rounded-full" required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                   />
                 </div>
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password" className="text-white">Konfirmasi Kata Sandi</Label>
                   </div>
-                  <Input id="confirmPassword" type="password" placeholder="Masukan kata sandi" className="w-full px-3 py-2 border-gray-600 bg-black/50 text-white rounded-full" required />
+                  <Input id="confirmPassword" type="password" placeholder="Masukan kata sandi" className="w-full px-3 py-2 border-gray-600 bg-black/50 text-white rounded-full" required
+                  value={password1}
+                  onChange={(e) => setPassword1(e.target.value)}
+                   />
                   <div className="flex items-center justify-between text-sm">
                     <p className="text-gray-400">Sudah punya akun? <Link className="text-white hover:underline" to="/login">Masuk</Link></p>
                   </div>

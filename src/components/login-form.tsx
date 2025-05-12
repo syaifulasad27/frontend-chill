@@ -16,22 +16,66 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const navigate = useNavigate()
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()    
-    const userData = {
-      name: username,
+    e.preventDefault();
+
+    //Ambil data user dari localStorage
+    const storedUsers = localStorage.getItem("user");
+    let users: Array<{
+      username: string;
+      name: string;
+      email: string;
+      password: string;
+      isLogin: boolean;
+    }> = [];
+
+    //Parse data yang ada
+    if (storedUsers) {
+      try {
+        users = JSON.parse(storedUsers);
+        
+        // Konversi ke array jika berupa single object
+        if (!Array.isArray(users)) {
+          users = [users];
+        }
+      } catch (error) {
+        console.error("Error parsing stored users:", error);
+        alert('Error: Gagal memproses data user');
+        return;
+      }
     }
 
-    // Simpan ke localStorage
-    localStorage.setItem("user", JSON.stringify(userData))
+    //Cari user yang sesuai dengan username
+    const userIndex = users.findIndex(user => user.username === username);
 
-    // Redirect ke homepage
-    navigate("/")
-  }
+    if (userIndex === -1) {
+      // Jika username tidak ditemukan
+      alert('Error: Username belum terdaftar!');
+      return;
+    }
+
+    // Verifikasi password
+    if (users[userIndex].password !== password) {
+      alert('Error: Password salah!');
+      return;
+    }
+
+    //Update status login
+    const updatedUsers = users.map(user => ({
+      ...user,
+      isLogin: user.username === username
+    }));
+
+    //Simpan kembali ke localStorage
+    localStorage.setItem("user", JSON.stringify(updatedUsers));
+
+    //Redirect ke homepage
+    navigate("/");
+  };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
         <CardHeader className="text-center">

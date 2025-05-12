@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react"
+import { useAuthUser } from '@/contexts/AuthContext';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -8,6 +10,49 @@ import {
 } from "@/components/ui/card"
 
 const ProfileEdit = () => {
+  const user = useAuthUser();
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    setName(user?.name || "")
+    setEmail(user?.email || "")
+  }, [user]);
+
+  const handleSubmit = () => {
+    if (!user?.username) return;
+
+    try {
+      // Ambil data dari localStorage
+      const storedUsers = JSON.parse(localStorage.getItem("user") || "[]");
+      const users = Array.isArray(storedUsers) ? storedUsers : [storedUsers];
+
+      // Cari index user yang login
+      const userIndex = users.findIndex(u => u.username === user.username);
+      if (userIndex === -1) return;
+
+      // Update data
+      const updatedUser = {
+        ...users[userIndex],
+        name: name.trim() || users[userIndex].name,
+        email: email.trim() || users[userIndex].email,
+        ...(password && { password: password }) // Only update if password not empty
+      };
+
+      // Simpan kembali
+      users[userIndex] = updatedUser;
+      localStorage.setItem("user", JSON.stringify(users));
+
+      // Feedback ke user
+      alert("Profil berhasil diperbarui!");
+
+    } catch (error) {
+      console.error("Gagal update profile:", error);
+      alert("Terjadi kesalahan saat menyimpan");
+    }
+  };
+
   return (
     <div className="px-4 lg:px-14 py-10 gap-8">
       <h2 className="text-white text-2xl font-semibold mb-5">Profile Saya</h2>
@@ -33,13 +78,27 @@ const ProfileEdit = () => {
           </div>
 
           <div className="grid gap-3">
-            <Label htmlFor="username" className="text-gray-400 font-medium">Nama Pengguna</Label>
+            <Label htmlFor="username" className="text-gray-400 font-medium">Username</Label>
             <Input
               id="username"
               type="username"
               placeholder="Masukan nama pengguna"
               className="w-full border border-gray-300 bg-[#22282A] rounded-lg p-2"
+              readOnly={true}
               required
+              value={user?.username}
+            />
+          </div>
+          <div className="grid gap-3">
+            <Label htmlFor="name" className="text-gray-400 font-medium">Nama Lengkap</Label>
+            <Input
+              id="name"
+              type="name"
+              placeholder="Masukan nama pengguna"
+              className="w-full border border-gray-300 bg-[#22282A] rounded-lg p-2"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="grid gap-3">
@@ -50,6 +109,8 @@ const ProfileEdit = () => {
               placeholder="Masukan Email"
               className="w-full border border-gray-300 bg-[#22282A] rounded-lg p-2"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="grid gap-3">
@@ -60,6 +121,8 @@ const ProfileEdit = () => {
               placeholder="Masukan password baru"
               className="w-full border border-gray-300 bg-[#22282A] rounded-lg p-2"
               required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </form>
@@ -92,7 +155,7 @@ const ProfileEdit = () => {
         </div>
 
       </div>
-      <Button className="bg-[#0F1E93] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full" aria-label="Simpan">Simpan</Button>
+      <Button onClick={handleSubmit} className="bg-[#0F1E93] text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full" aria-label="Simpan">Simpan</Button>
     </div>
   );
 };
