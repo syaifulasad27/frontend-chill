@@ -2,12 +2,12 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { CardFilm } from "@/components/card-film"
 
 const newRilis = [
-    { title: "Movie Title 6", img: "/assets/img/img14.png", top10: true},
-    { title: "A Man Called Otto", img: "/assets/img/img15.png", new: true, top10: true},
-    { title: "Movie Title 5", img: "/assets/img/img9.png", new: true},
-  { title: "Ted Lasso", img: "/assets/img/img16.png",top10: false},
-  { title: "Movie Title 3", img: "/assets/img/img7.png", new: true, top10: false},
-  { title: "Movie Title 4", img: "/assets/img/img8.png"},
+    { title: "Movie Title 6", img: "/assets/img/img14.jpg", top10: true},
+    { title: "A Man Called Otto", img: "/assets/img/img15.jpg", new: true, top10: true},
+    { title: "Movie Title 5", img: "/assets/img/img9.jpg", new: true},
+  { title: "Ted Lasso", img: "/assets/img/img16.jpg",top10: false},
+  { title: "Movie Title 3", img: "/assets/img/img7.jpg", new: true, top10: false},
+  { title: "Movie Title 4", img: "/assets/img/img8.jpg"},
 ]
 
 export function NewRilis() {

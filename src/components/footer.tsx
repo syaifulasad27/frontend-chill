@@ -16,7 +16,7 @@ export default function Footer() {
           <div>
             <div className="mb-4">
               <img
-                src="/assets/img/logo-chill.png"
+                src="/assets/img/logo-chill.webp"
                 alt="Chill logo"
                 className="h-20"
               />

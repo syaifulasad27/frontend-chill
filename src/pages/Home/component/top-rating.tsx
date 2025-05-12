@@ -2,12 +2,12 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { CardFilm } from "@/components/card-film"
 
 const topRated = [
-  { title: "A Man Called Otto", img: "/assets/img/img5.png", new: true, top10: true},
-  { title: "Ted Lasso", img: "/assets/img/img6.png", new: true, top10: false},
-  { title: "Movie Title 3", img: "/assets/img/img7.png", new: true, top10: false},
-  { title: "Movie Title 4", img: "/assets/img/img8.png", new: true, top10: false},
-  { title: "Movie Title 5", img: "/assets/img/img9.png", new: true, top10: false},
-  { title: "Movie Title 6", img: "/assets/img/img1.png", premium: true, top10: false},
+  { title: "A Man Called Otto", img: "/assets/img/img5.jpg", new: true, top10: true},
+  { title: "Ted Lasso", img: "/assets/img/img6.jpg", new: true, top10: false},
+  { title: "Movie Title 3", img: "/assets/img/img7.jpg", new: true, top10: false},
+  { title: "Movie Title 4", img: "/assets/img/img8.jpg", new: true, top10: false},
+  { title: "Movie Title 5", img: "/assets/img/img9.jpg", new: true, top10: false},
+  { title: "Movie Title 6", img: "/assets/img/img1.jpg", premium: true, top10: false},
 ]
 
 export function TopRating() {

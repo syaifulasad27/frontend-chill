@@ -41,7 +41,7 @@ const NavBar = () => {
       <nav className="px-4 lg:px-14 py-3 flex justify-between items-center bg-[#181A1C]">
         <div className="flex items-center">
           <Link to="/">
-            <img src={'/assets/img/logo-chill.png'} alt="Chill Logo" className="h-10 mr-6 lg:mr-10" />
+            <img src={'/assets/img/logo-chill.webp'} alt="Chill Logo" className="h-10 mr-6 lg:mr-10" />
           </Link>
           <div className="hidden md:flex space-x-4">
             <Link to="#series" className="text-gray-300 hover:text-white">Series</Link>
@@ -54,7 +54,7 @@ const NavBar = () => {
           {isLoggedIn ? (
             <>
             <button onClick={() => setProfileOpen(!isProfileOpen)} className="flex items-center focus:outline-none cursor-pointer">
-              <img src={'/assets/img/avatar.png'} alt={user?.name} className="rounded-full w-8 h-8 lg:w-10 lg:h-10" />
+              <img src={'/assets/img/avatar.webp'} alt={user?.name} className="rounded-full w-8 h-8 lg:w-10 lg:h-10" />
               <svg className="w-4 h-4 lg:w-5 lg:h-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>

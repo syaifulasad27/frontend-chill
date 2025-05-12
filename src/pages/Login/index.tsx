@@ -9,7 +9,7 @@ export default function LoginPage() {
                 <div className="text-center">
                     <div className="flex justify-center items-center">
                         <Link to="/">
-                            <img src={'/assets/img/logo-chill.png'} alt="Chill logo" className="h-15 sm:h-20" />
+                            <img src={'/assets/img/logo-chill.webp'} alt="Chill logo" className="h-15 sm:h-20" />
                         </Link>
                     </div>
                 </div>

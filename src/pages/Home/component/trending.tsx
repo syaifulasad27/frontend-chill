@@ -2,11 +2,11 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { TrendingCard } from "./trending-card"
 
 const trendingMovies = [
-    { title: "Deadpool", top10: true, new:false, img: "/assets/img/img10.png" },
-    { title: "Movie Title 2", top10: true, new:false, img: "/assets/img/img11.png" },
-    { title: "Movie Title 3", top10: true, new:false, img: "/assets/img/img12.png" },
-    { title: "Movie Title 4", top10: true, new:false, img: "/assets/img/img13.png" },
-    { title: "Movie Title 5", top10: true, new:false, img: "/assets/img/img14.png" },
+    { title: "Deadpool", top10: true, new:false, img: "/assets/img/img10.jpg" },
+    { title: "Movie Title 2", top10: true, new:false, img: "/assets/img/img11.jpg" },
+    { title: "Movie Title 3", top10: true, new:false, img: "/assets/img/img12.jpg" },
+    { title: "Movie Title 4", top10: true, new:false, img: "/assets/img/img13.jpg" },
+    { title: "Movie Title 5", top10: true, new:false, img: "/assets/img/img14.jpg" },
   ];
 
 export const Trending = () => {

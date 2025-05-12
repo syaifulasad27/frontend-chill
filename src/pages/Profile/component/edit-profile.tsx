@@ -68,7 +68,7 @@ const ProfileEdit = () => {
           <Card className="bg-[#3D4142] w-full sm:w-[350px] lg:w-[500px] border-0">
             <CardContent className="grid gap-2 sm:gap-4">
               <div className=" flex items-center space-x-4 text-white">
-                <img src="/assets/img/warning.png" className="h-10 w-10 sm:h-20 sm:w-20" alt="warning" />
+                <img src="/assets/img/warning.webp" className="h-10 w-10 sm:h-20 sm:w-20" alt="warning" />
                 <div className="flex-1 space-y-2">
                   <p className="text-sm sm:text-lg font-medium leading-none">
                     Saat ini anda belum berlangganan
