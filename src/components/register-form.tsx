@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner"
 
 export function RegisterForm({
   className,
@@ -54,13 +55,17 @@ export function RegisterForm({
     );
 
     if (isUsernameExist) {
-      alert('Error: Username sudah digunakan!');
+      toast("Error!!!", {
+        description: "Username sudah digunakan!",
+      })
       return;
     }
 
     // Validasi password
     if (password !== password1) {
-      alert('Error: Password tidak sama!');
+      toast("Error!!!", {
+        description: "Password tidak sama!",
+      })
       return;
     }
 

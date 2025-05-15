@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Link } from "react-router-dom";
+import { toast } from "sonner"
 
 export function LoginForm({
   className,
@@ -54,13 +55,17 @@ export function LoginForm({
 
     if (userIndex === -1) {
       // Jika username tidak ditemukan
-      alert('Error: Username belum terdaftar!');
+      toast("Error!!!", {
+        description: "Username belum terdaftar!",
+      })
       return;
     }
 
     // Verifikasi password
     if (users[userIndex].password !== password) {
-      alert('Error: Password salah!');
+      toast("Error!!!", {
+        description: "Password salah!",
+      })
       return;
     }
 
