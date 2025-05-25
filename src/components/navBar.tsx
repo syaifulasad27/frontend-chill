@@ -80,6 +80,7 @@ const NavBar = () => {
           <div className="hidden md:flex space-x-4">
             <Link to="#series" className="text-gray-300 hover:text-white">Series</Link>
             <Link to="/film" className="text-gray-300 hover:text-white">Film</Link>
+            <Link to="/admin/users" className="text-gray-300 hover:text-white">Users</Link>
             {isLoggedIn && <Link to="/favorite" className="text-gray-300 hover:text-white">Daftar Saya</Link>}
           </div>
         </div>
@@ -122,6 +123,7 @@ const NavBar = () => {
         <div className="md:hidden bg-[#181A1C] px-4 py-2 space-y-2">
           <Link to="#series" className="block text-gray-300 hover:text-white">Series</Link>
           <Link to="/film" className="block text-gray-300 hover:text-white">Film</Link>
+          <Link to="/admin/users" className="block text-gray-300 hover:text-white">Users</Link>
           {isLoggedIn ? (
             <>
           <Link to="/favorite" className="block text-gray-300 hover:text-white">Daftar Saya</Link>
