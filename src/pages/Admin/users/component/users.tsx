@@ -3,6 +3,7 @@ import usersApi, { User } from '@/services/api/admin/users';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import UserForm from './form-user';
+import { useUserStore } from '@/store/store';
 
 import {
   Table,
@@ -14,30 +15,15 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-const Users: React.FC = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+const Users: React.FC = () => {  
+  const { users, fetchUsers, loading, error } = useUserStore(); 
   const [form, setForm] = useState<boolean>(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<User>>({});
 
-  const fetchUsers = async () => {
-    try {
-      setLoading(true);
-      const response = await usersApi.getAll();
-      setUsers(response.data);
-    } catch (err: unknown) {
-      setError('Gagal memuat data users');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
